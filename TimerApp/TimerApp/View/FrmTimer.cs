@@ -23,7 +23,6 @@ namespace TimerApp
         // Fungsi untuk menampilkan tampilan default
         private void ViewAwal()
         {
-            _timer.Stop();
             _jam = 0;
             _menit = 0;
             _detik = 0;
