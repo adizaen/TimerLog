@@ -47,6 +47,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\TimeController.cs" />
+    <Compile Include="Model\Context\DbContext.cs" />
+    <Compile Include="Model\Entity\Time.cs" />
+    <Compile Include="Model\Repository\TimeRepository.cs" />
     <Compile Include="View\FrmTimer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,12 +81,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controller\" />
-    <Folder Include="Model\Context\" />
-    <Folder Include="Model\Entity\" />
-    <Folder Include="Model\Repository\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="iconfinder_hourglass_1055043.ico" />
   </ItemGroup>
