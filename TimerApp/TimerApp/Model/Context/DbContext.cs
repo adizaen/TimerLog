@@ -23,7 +23,7 @@ namespace TimerApp.Model.Context
 
             try
             {
-                string dbName = @"D:\Project\TimerLog\TimerApp\Database\DbTimer.mdb";
+                string dbName = Directory.GetCurrentDirectory() + "\\Database\\DbTimer.mdb";
                 string connectionString = string.Format("Provider=Microsoft.Jet.OLEDB.4.0;Data Source={0}", dbName);
                 conn = new OleDbConnection(connectionString);
                 conn.Open();

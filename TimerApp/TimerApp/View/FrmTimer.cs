@@ -105,7 +105,9 @@ namespace TimerApp
                 if (_jam == jam && _menit == menit && _detik == detik - 1)
                 {
                     player = new SoundPlayer();
-                    player.SoundLocation = "Music.wav";
+
+                    string location = Directory.GetCurrentDirectory() + "\\Media\\Music.wav";
+                    player.SoundLocation = location;
                     player.PlayLooping();
                     btnStop.Enabled = true;
                 }

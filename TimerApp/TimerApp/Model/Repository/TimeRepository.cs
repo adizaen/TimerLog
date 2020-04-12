@@ -21,14 +21,14 @@ namespace TimerApp.Model.Repository
         {
             int result = 0;
 
-            string sql = @"insert into Tbl_Time (Log, Jam, Menit, Detik) values (@Log, @Jam, @Menit, @Detik)";
+            string sql = @"insert into tb_time (log, jam, menit, detik) values (@log, @jam, @menit, @detik)";
 
             using (OleDbCommand cmd=new OleDbCommand(sql, _conn))
             {
-                cmd.Parameters.AddWithValue("@Log", time.NamaLog);
-                cmd.Parameters.AddWithValue("@Jam", time.Jam);
-                cmd.Parameters.AddWithValue("@Menit", time.Menit);
-                cmd.Parameters.AddWithValue("@Detik", time.Detik);
+                cmd.Parameters.AddWithValue("@log", time.NamaLog);
+                cmd.Parameters.AddWithValue("@jam", time.Jam);
+                cmd.Parameters.AddWithValue("@menit", time.Menit);
+                cmd.Parameters.AddWithValue("@detik", time.Detik);
 
                 try
                 {
@@ -47,11 +47,11 @@ namespace TimerApp.Model.Repository
         {
             int result = 0;
 
-            string sql = @"delete from Tbl_Time where Id_Log = @Id_Log";
+            string sql = @"delete from tb_time where log_id = @log_id";
 
             using (OleDbCommand cmd=new OleDbCommand(sql, _conn))
             {
-                cmd.Parameters.AddWithValue("@Id_Log", time.LogId);
+                cmd.Parameters.AddWithValue("@log_id", time.LogId);
 
                 try
                 {
@@ -72,7 +72,7 @@ namespace TimerApp.Model.Repository
 
             try
             {
-               string sql = @"select*from Tbl_Time";
+               string sql = @"select*from tb_time";
 
                 using (OleDbCommand cmd = new OleDbCommand(sql, _conn))
                 {
@@ -82,11 +82,11 @@ namespace TimerApp.Model.Repository
                         {
                             Time time = new Time();
 
-                            time.LogId = int.Parse(dtr["Id_Log"].ToString());
-                            time.NamaLog = dtr["Log"].ToString();
-                            time.Jam = int.Parse(dtr["Jam"].ToString());
-                            time.Menit = int.Parse(dtr["Menit"].ToString());
-                            time.Detik = int.Parse(dtr["Detik"].ToString());
+                            time.LogId = int.Parse(dtr["log_id"].ToString());
+                            time.NamaLog = dtr["log"].ToString();
+                            time.Jam = int.Parse(dtr["jam"].ToString());
+                            time.Menit = int.Parse(dtr["menit"].ToString());
+                            time.Detik = int.Parse(dtr["detik"].ToString());
 
                             list.Add(time);
                         }
