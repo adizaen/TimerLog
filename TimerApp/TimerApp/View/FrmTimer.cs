@@ -5,7 +5,11 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.IO;
+using System.Media;
 using System.Windows.Forms;
+using TimerApp.Model.Entity;
+using TimerApp.Controller;
 
 namespace TimerApp
 {
@@ -14,10 +18,43 @@ namespace TimerApp
         private System.Timers.Timer _timer;
         private int _jam, _menit, _detik;
 
+        private List<Time> listOfTime = new List<Time>();
+        private TimeController controller;
+        private SoundPlayer player;
+
         public FrmTimer()
         {
             InitializeComponent();
+            controller = new TimeController();
             ViewAwal();
+            InisialisasiDataGridView();
+            TampilkanDataGridView();
+        }
+
+        private void InisialisasiDataGridView()
+        {
+            dgv.Columns.Add("no", "No.");
+            dgv.Columns.Add("id", "ID");
+            dgv.Columns.Add("nama", "Log");
+            dgv.Columns.Add("waktu", "Time");
+
+            dgv.Columns[0].Width = 40;
+            dgv.Columns[1].Width = 0;
+            dgv.Columns[2].Width = 100;
+            dgv.Columns[3].Width = 100;
+
+            dgv.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgv.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgv.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dgv.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 9.75F);
+            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv.AllowUserToAddRows = false;
+            dgv.MultiSelect = false;
+            dgv.RowHeadersVisible = false;
+            dgv.ReadOnly = true;
         }
 
         // Fungsi untuk menampilkan tampilan default
@@ -29,6 +66,7 @@ namespace TimerApp
             lblTimer.Text = "00:00:00";
             SetTimer(_jam, _menit, _detik);
             this.Text = "Timer";
+            btnStop.Enabled = false;
         }
 
         // Fungsi untuk set waktu pada label timer
@@ -57,14 +95,61 @@ namespace TimerApp
 
                 SetTimer(_jam, _menit, _detik);
             }));
+
+            if (cbAlert.Checked == true)
+            {
+                var jam = int.Parse(dtAlert.Value.Hour.ToString());
+                var menit = int.Parse(dtAlert.Value.Minute.ToString());
+                var detik = int.Parse(dtAlert.Value.Second.ToString());
+
+                if (_jam == jam && _menit == menit && _detik == detik - 1)
+                {
+                    player = new SoundPlayer();
+                    player.SoundLocation = "Music.wav";
+                    player.PlayLooping();
+                    btnStop.Enabled = true;
+                }
+            }
+        }
+
+        private int CountDataGridView()
+        {
+            int count = 0;
+            count = dgv.Rows.Count;
+
+            return count;
+        }
+
+        private void TampilkanDataGridView()
+        {
+            dgv.Rows.Clear();
+            listOfTime = controller.ReadAll();
+
+            foreach (var time in listOfTime)
+            {
+                var noUrut = CountDataGridView() + 1;
+                string waktu = time.Jam.ToString("D2") + ":" + time.Menit.ToString("D2") + ":" + time.Detik.ToString("D2");
+
+                dgv.Rows.Add(noUrut.ToString(), time.LogId, time.NamaLog, waktu);
+            }
         }
 
         private void FrmTimer_Load(object sender, EventArgs e)
         {
+            ToolTip toolTip1 = new ToolTip();
+
+            toolTip1.SetToolTip(this.btnStart, "Start timer");
+            toolTip1.SetToolTip(this.btnPause, "Pause timer");
+            toolTip1.SetToolTip(this.btnReset, "Reset timer to default");
+            toolTip1.SetToolTip(this.btnLog, "Record log time");
+            toolTip1.SetToolTip(this.btnSet, "Custom start timer");
+            toolTip1.SetToolTip(this.btnStop, "Stop alarm sound");
+            toolTip1.SetToolTip(this.btnStartAt, "Start timer from selected row");
+            toolTip1.SetToolTip(this.btnDelete, "Delete selected row");
+
             _timer = new System.Timers.Timer();
             _timer.Interval = 1000;
             _timer.Elapsed += OnTimeEvent;
-            lblTimer.Focus();
         }
 
         private void FrmTimer_FormClosing(object sender, FormClosingEventArgs e)
@@ -93,18 +178,33 @@ namespace TimerApp
 
         private void btnLog_Click(object sender, EventArgs e)
         {
+            var time = new Time();
 
+            time.NamaLog = "Log " + CountDataGridView() + 1.ToString();
+            time.Jam = _jam;
+            time.Menit = _menit;
+            time.Detik = _detik;
+            controller.Create(time);
+
+            TampilkanDataGridView();
         }
 
         private void btnSet_Click(object sender, EventArgs e)
         {
-            var startAt = dtStartAt.Value.ToString("HH:MM:ss");
-
             _jam = int.Parse(dtStartAt.Value.Hour.ToString());
             _menit = int.Parse(dtStartAt.Value.Minute.ToString());
             _detik = int.Parse(dtStartAt.Value.Second.ToString());
 
             SetTimer(_jam, _menit, _detik);
+        }
+
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            if (this.player.IsLoadCompleted)
+            {
+                player.Stop();
+                btnStop.Enabled = false;
+            }
         }
 
         private void btnStartAt_Click(object sender, EventArgs e)
@@ -114,7 +214,29 @@ namespace TimerApp
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            if (dgv.SelectedRows.Count > 0)
+            {
+                var konfirmasi = MessageBox.Show("Apakah data log ingin dihapus?", "Konfirmasi",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
+                if (konfirmasi == DialogResult.Yes)
+                {
+                    var time = new Time();
+                    int index = dgv.CurrentCell.RowIndex;
+
+                    DataGridViewRow row = (DataGridViewRow)dgv.Rows[index].Clone();
+                    row.Cells[1].Value = time.LogId;
+                    
+                    var result = controller.Delete(time);
+                    if (result > 0)
+                        TampilkanDataGridView();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Data log belum dipilih!", "Peringatan",
+                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
     }
 }

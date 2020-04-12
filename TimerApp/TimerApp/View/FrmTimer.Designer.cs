@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmTimer));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -39,6 +40,8 @@
             this.cbAlert = new System.Windows.Forms.CheckBox();
             this.dtStartAt = new System.Windows.Forms.DateTimePicker();
             this.dtAlert = new System.Windows.Forms.DateTimePicker();
+            this.btnSet = new System.Windows.Forms.Button();
+            this.btnStop = new System.Windows.Forms.Button();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.btnStart = new System.Windows.Forms.Button();
@@ -48,7 +51,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.lblTimer = new System.Windows.Forms.Label();
-            this.btnSet = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
@@ -132,18 +135,20 @@
             // 
             // tableLayoutPanel3
             // 
-            this.tableLayoutPanel3.ColumnCount = 6;
+            this.tableLayoutPanel3.ColumnCount = 7;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.06266F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.06265F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.06266F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.81203F));
             this.tableLayoutPanel3.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.cbAlert, 4, 0);
             this.tableLayoutPanel3.Controls.Add(this.dtStartAt, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.dtAlert, 5, 0);
             this.tableLayoutPanel3.Controls.Add(this.btnSet, 2, 0);
+            this.tableLayoutPanel3.Controls.Add(this.btnStop, 6, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 356);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -167,7 +172,7 @@
             // 
             this.cbAlert.AutoSize = true;
             this.cbAlert.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbAlert.Location = new System.Drawing.Point(324, 3);
+            this.cbAlert.Location = new System.Drawing.Point(254, 3);
             this.cbAlert.Name = "cbAlert";
             this.cbAlert.Size = new System.Drawing.Size(74, 28);
             this.cbAlert.TabIndex = 1;
@@ -184,7 +189,7 @@
             this.dtStartAt.Location = new System.Drawing.Point(64, 3);
             this.dtStartAt.Name = "dtStartAt";
             this.dtStartAt.ShowUpDown = true;
-            this.dtStartAt.Size = new System.Drawing.Size(104, 26);
+            this.dtStartAt.Size = new System.Drawing.Size(84, 26);
             this.dtStartAt.TabIndex = 2;
             this.dtStartAt.Value = new System.DateTime(2020, 4, 10, 0, 0, 0, 0);
             // 
@@ -194,12 +199,38 @@
             this.dtAlert.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dtAlert.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtAlert.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dtAlert.Location = new System.Drawing.Point(404, 3);
+            this.dtAlert.Location = new System.Drawing.Point(334, 3);
             this.dtAlert.Name = "dtAlert";
             this.dtAlert.ShowUpDown = true;
-            this.dtAlert.Size = new System.Drawing.Size(107, 26);
+            this.dtAlert.Size = new System.Drawing.Size(84, 26);
             this.dtAlert.TabIndex = 3;
             this.dtAlert.Value = new System.DateTime(2020, 4, 10, 0, 0, 0, 0);
+            // 
+            // btnSet
+            // 
+            this.btnSet.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSet.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnSet.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSet.Location = new System.Drawing.Point(154, 3);
+            this.btnSet.Name = "btnSet";
+            this.btnSet.Size = new System.Drawing.Size(84, 28);
+            this.btnSet.TabIndex = 4;
+            this.btnSet.Text = "Set";
+            this.btnSet.UseVisualStyleBackColor = true;
+            this.btnSet.Click += new System.EventHandler(this.btnSet_Click);
+            // 
+            // btnStop
+            // 
+            this.btnStop.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnStop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnStop.Location = new System.Drawing.Point(424, 3);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(87, 28);
+            this.btnStop.TabIndex = 5;
+            this.btnStop.Text = "Stop";
+            this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
             // tableLayoutPanel4
             // 
@@ -329,19 +360,6 @@
             this.lblTimer.Text = "00:00:00";
             this.lblTimer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // btnSet
-            // 
-            this.btnSet.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSet.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSet.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSet.Location = new System.Drawing.Point(174, 3);
-            this.btnSet.Name = "btnSet";
-            this.btnSet.Size = new System.Drawing.Size(104, 28);
-            this.btnSet.TabIndex = 4;
-            this.btnSet.Text = "Set";
-            this.btnSet.UseVisualStyleBackColor = true;
-            this.btnSet.Click += new System.EventHandler(this.btnSet_Click);
-            // 
             // FrmTimer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -393,6 +411,8 @@
         private System.Windows.Forms.Label lblTimer;
         private System.Windows.Forms.DataGridView dgv;
         private System.Windows.Forms.Button btnSet;
+        private System.Windows.Forms.Button btnStop;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 

@@ -23,8 +23,8 @@ namespace TimerApp.Model.Context
 
             try
             {
-                string dbName = Directory.GetCurrentDirectory() + "\\Database\\DbTimer.mdb";
-                string connectionString = string.Format("Provider=Microsoft.Jet.OLEDB.4.0;Data Source= {0}; Jet OLEDB:Database Password=$Abc123$;", dbName);
+                string dbName = @"D:\Project\TimerLog\TimerApp\Database\DbTimer.mdb";
+                string connectionString = string.Format("Provider=Microsoft.Jet.OLEDB.4.0;Data Source={0}", dbName);
                 conn = new OleDbConnection(connectionString);
                 conn.Open();
             }
@@ -42,16 +42,15 @@ namespace TimerApp.Model.Context
             {
                 try
                 {
-                    if (_conn.State != ConnectionState.Closed)
-                        _conn.Close();
+                    if (_conn.State != ConnectionState.Closed) _conn.Close();
                 }
                 finally
                 {
                     _conn.Dispose();
                 }
-
-                GC.SuppressFinalize(this);
             }
+
+            GC.SuppressFinalize(this);
         }
     }
 }

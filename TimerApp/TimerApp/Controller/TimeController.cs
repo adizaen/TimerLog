@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using TimerApp.Model.Context;
 using System.Windows.Forms;
+using TimerApp.Model.Context;
 using TimerApp.Model.Entity;
 using TimerApp.Model.Repository;
 
@@ -47,6 +47,10 @@ namespace TimerApp.Controller
                 result = _repository.Create(time);
             }
 
+            if (result == 0)
+                MessageBox.Show("Log gagal disimpan!", "Gagal",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             return result;
         }
 
@@ -65,6 +69,10 @@ namespace TimerApp.Controller
                 _repository = new TimeRepository(context);
                 result = _repository.Delete(time);
             }
+
+            if (result == 0)
+                MessageBox.Show("Log gagal dihapus!", "Gagal",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             return result;
         }
