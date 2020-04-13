@@ -39,9 +39,9 @@ namespace TimerApp
             dgv.Columns.Add("waktu", "Time");
 
             dgv.Columns[0].Width = 40;
-            dgv.Columns[1].Width = 0;
+            dgv.Columns[1].Width = 50;
             dgv.Columns[2].Width = 100;
-            dgv.Columns[3].Width = 100;
+            dgv.Columns[3].Width = 110;
 
             dgv.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgv.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -49,6 +49,7 @@ namespace TimerApp
             dgv.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
+            dgv.Columns[1].Visible = false;
             dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 9.75F);
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv.AllowUserToAddRows = false;
@@ -117,7 +118,7 @@ namespace TimerApp
         private int CountDataGridView()
         {
             int count = 0;
-            count = dgv.Rows.Count;
+            count = dgv.Rows.Count + 1;
 
             return count;
         }
@@ -129,7 +130,7 @@ namespace TimerApp
 
             foreach (var time in listOfTime)
             {
-                var noUrut = CountDataGridView() + 1;
+                var noUrut = CountDataGridView();
                 string waktu = time.Jam.ToString("D2") + ":" + time.Menit.ToString("D2") + ":" + time.Detik.ToString("D2");
 
                 dgv.Rows.Add(noUrut.ToString(), time.LogId, time.NamaLog, waktu);
@@ -182,7 +183,7 @@ namespace TimerApp
         {
             var time = new Time();
 
-            time.NamaLog = "Log " + CountDataGridView() + 1.ToString();
+            time.NamaLog = "Log " + CountDataGridView().ToString();
             time.Jam = _jam;
             time.Menit = _menit;
             time.Detik = _detik;
@@ -223,11 +224,7 @@ namespace TimerApp
 
                 if (konfirmasi == DialogResult.Yes)
                 {
-                    var time = new Time();
-                    int index = dgv.CurrentCell.RowIndex;
-
-                    DataGridViewRow row = (DataGridViewRow)dgv.Rows[index].Clone();
-                    row.Cells[1].Value = time.LogId;
+                    Time time = listOfTime[dgv.CurrentCell.RowIndex];
                     
                     var result = controller.Delete(time);
                     if (result > 0)
