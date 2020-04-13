@@ -103,7 +103,7 @@ namespace TimerApp
                 var menit = int.Parse(dtAlert.Value.Minute.ToString());
                 var detik = int.Parse(dtAlert.Value.Second.ToString());
 
-                if (_jam == jam && _menit == menit && _detik == detik - 1)
+                if (_jam == jam && _menit == menit && _detik == detik)
                 {
                     player = new SoundPlayer();
 
@@ -128,15 +128,18 @@ namespace TimerApp
             dgv.Rows.Clear();
             listOfTime = controller.ReadAll();
 
-            foreach (var time in listOfTime)
+            if (listOfTime.Count != 0)
             {
-                var noUrut = CountDataGridView();
-                string waktu = time.Jam.ToString("D2") + ":" + time.Menit.ToString("D2") + ":" + time.Detik.ToString("D2");
+                foreach (var time in listOfTime)
+                {
+                    var noUrut = CountDataGridView();
+                    string waktu = time.Jam.ToString("D2") + ":" + time.Menit.ToString("D2") + ":" + time.Detik.ToString("D2");
 
-                dgv.Rows.Add(noUrut.ToString(), time.LogId, time.NamaLog, waktu);
+                    dgv.Rows.Add(noUrut.ToString(), time.LogId, time.NamaLog, waktu);
+                }
+
+                dgv.CurrentCell = dgv.Rows[CountDataGridView() - 2].Cells[0];
             }
-
-            dgv.CurrentCell = dgv.Rows[CountDataGridView() - 2].Cells[0];
         }
 
         private void FrmTimer_Load(object sender, EventArgs e)
@@ -185,7 +188,7 @@ namespace TimerApp
         {
             var time = new Time();
 
-            time.NamaLog = "Log " + CountDataGridView().ToString();
+            time.NamaLog = "Log " + (CountDataGridView() + 1).ToString();
             time.Jam = _jam;
             time.Menit = _menit;
             time.Detik = _detik;
