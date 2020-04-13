@@ -66,7 +66,7 @@ namespace TimerApp
             _detik = 0;
             lblTimer.Text = "00:00:00";
             SetTimer(_jam, _menit, _detik);
-            this.Text = "Timer";
+            this.Text = "Stopwatch";
             btnStop.Enabled = false;
         }
 
@@ -146,6 +146,7 @@ namespace TimerApp
         {
             ToolTip toolTip1 = new ToolTip();
 
+            toolTip1.SetToolTip(this.btnSwitch, "Switch to countdown mode");
             toolTip1.SetToolTip(this.btnStart, "Start timer");
             toolTip1.SetToolTip(this.btnPause, "Pause timer");
             toolTip1.SetToolTip(this.btnReset, "Reset timer to default");
@@ -169,13 +170,13 @@ namespace TimerApp
         private void btnStart_Click(object sender, EventArgs e)
         {
             _timer.Start();
-            this.Text = "Timer - Running";
+            this.Text = "Stopwatch - Running";
         }
 
         private void btnPause_Click(object sender, EventArgs e)
         {
             _timer.Stop();
-            this.Text = "Timer - Paused";
+            this.Text = "Stopwatch - Paused";
         }
 
         private void btnReset_Click(object sender, EventArgs e)
