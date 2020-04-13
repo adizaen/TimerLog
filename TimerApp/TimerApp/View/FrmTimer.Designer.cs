@@ -47,28 +47,28 @@
             this.btnReset = new System.Windows.Forms.Button();
             this.btnPause = new System.Windows.Forms.Button();
             this.btnLog = new System.Windows.Forms.Button();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
-            this.dgv = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnSwitch = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.lblTimer = new System.Windows.Forms.Label();
-            this.btnSwitch = new System.Windows.Forms.Button();
+            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+            this.dgv = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.dtDate = new System.Windows.Forms.DateTimePicker();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
-            this.tableLayoutPanel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.tableLayoutPanel6.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
+            this.tableLayoutPanel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
             this.SuspendLayout();
@@ -326,31 +326,6 @@
             this.btnLog.UseVisualStyleBackColor = false;
             this.btnLog.Click += new System.EventHandler(this.btnLog_Click);
             // 
-            // tableLayoutPanel7
-            // 
-            this.tableLayoutPanel7.ColumnCount = 1;
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.Controls.Add(this.dgv, 0, 1);
-            this.tableLayoutPanel7.Controls.Add(this.panel2, 0, 0);
-            this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel7.Location = new System.Drawing.Point(523, 3);
-            this.tableLayoutPanel7.Name = "tableLayoutPanel7";
-            this.tableLayoutPanel7.RowCount = 2;
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14F));
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 86F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(275, 347);
-            this.tableLayoutPanel7.TabIndex = 4;
-            //this.tableLayoutPanel7.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel7_Paint);
-            // 
-            // dgv
-            // 
-            this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgv.Location = new System.Drawing.Point(3, 51);
-            this.dgv.Name = "dgv";
-            this.dgv.Size = new System.Drawing.Size(269, 293);
-            this.dgv.TabIndex = 1;
-            // 
             // tableLayoutPanel6
             // 
             this.tableLayoutPanel6.ColumnCount = 1;
@@ -365,6 +340,21 @@
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
             this.tableLayoutPanel6.Size = new System.Drawing.Size(508, 236);
             this.tableLayoutPanel6.TabIndex = 1;
+            // 
+            // btnSwitch
+            // 
+            this.btnSwitch.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSwitch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnSwitch.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSwitch.Image = global::TimerApp.Properties.Resources.swap;
+            this.btnSwitch.Location = new System.Drawing.Point(3, 3);
+            this.btnSwitch.Name = "btnSwitch";
+            this.btnSwitch.Size = new System.Drawing.Size(502, 41);
+            this.btnSwitch.TabIndex = 1;
+            this.btnSwitch.Text = " Switch Countdown";
+            this.btnSwitch.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSwitch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSwitch.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
@@ -401,20 +391,29 @@
             this.lblTimer.Text = "00:00:00";
             this.lblTimer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // btnSwitch
+            // tableLayoutPanel7
             // 
-            this.btnSwitch.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSwitch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSwitch.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSwitch.Image = global::TimerApp.Properties.Resources.swap;
-            this.btnSwitch.Location = new System.Drawing.Point(3, 3);
-            this.btnSwitch.Name = "btnSwitch";
-            this.btnSwitch.Size = new System.Drawing.Size(502, 41);
-            this.btnSwitch.TabIndex = 1;
-            this.btnSwitch.Text = " Switch Countdown";
-            this.btnSwitch.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSwitch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSwitch.UseVisualStyleBackColor = true;
+            this.tableLayoutPanel7.ColumnCount = 1;
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel7.Controls.Add(this.dgv, 0, 1);
+            this.tableLayoutPanel7.Controls.Add(this.panel2, 0, 0);
+            this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(523, 3);
+            this.tableLayoutPanel7.Name = "tableLayoutPanel7";
+            this.tableLayoutPanel7.RowCount = 2;
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14F));
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 86F));
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(275, 347);
+            this.tableLayoutPanel7.TabIndex = 4;
+            // 
+            // dgv
+            // 
+            this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgv.Location = new System.Drawing.Point(3, 51);
+            this.dgv.Name = "dgv";
+            this.dgv.Size = new System.Drawing.Size(269, 293);
+            this.dgv.TabIndex = 1;
             // 
             // panel2
             // 
@@ -463,6 +462,7 @@
             this.dtDate.Size = new System.Drawing.Size(167, 22);
             this.dtDate.TabIndex = 1;
             this.dtDate.Value = new System.DateTime(2020, 4, 13, 0, 0, 0, 0);
+            this.dtDate.ValueChanged += new System.EventHandler(this.dtDate_ValueChanged);
             // 
             // FrmTimer
             // 
@@ -485,12 +485,12 @@
             this.tableLayoutPanel3.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
-            this.tableLayoutPanel7.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.tableLayoutPanel6.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.tableLayoutPanel9.ResumeLayout(false);
             this.tableLayoutPanel9.PerformLayout();
+            this.tableLayoutPanel7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.panel2.ResumeLayout(false);
             this.tableLayoutPanel8.ResumeLayout(false);
             this.tableLayoutPanel8.PerformLayout();

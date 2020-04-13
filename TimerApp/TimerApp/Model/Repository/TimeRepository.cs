@@ -21,11 +21,12 @@ namespace TimerApp.Model.Repository
         {
             int result = 0;
 
-            string sql = @"insert into tb_time (log, jam, menit, detik) values (@log, @jam, @menit, @detik)";
+            string sql = @"insert into tb_time (log, tanggal, jam, menit, detik) values (@log, @tanggal, @jam, @menit, @detik)";
 
             using (OleDbCommand cmd=new OleDbCommand(sql, _conn))
             {
                 cmd.Parameters.AddWithValue("@log", time.NamaLog);
+                cmd.Parameters.AddWithValue("@tanggal", time.Tanggal);
                 cmd.Parameters.AddWithValue("@jam", time.Jam);
                 cmd.Parameters.AddWithValue("@menit", time.Menit);
                 cmd.Parameters.AddWithValue("@detik", time.Detik);
@@ -66,24 +67,27 @@ namespace TimerApp.Model.Repository
             return result;
         }
 
-        public List<Time> ReadAll()
+        public List<Time> ReadByDate(DateTime date)
         {
             List<Time> list = new List<Time>();
 
             try
             {
-               string sql = @"select*from tb_time";
+               string sql = @"select*from tb_time where tanggal = @tanggal";
 
                 using (OleDbCommand cmd = new OleDbCommand(sql, _conn))
                 {
+                    cmd.Parameters.AddWithValue("@tanggal", date);
+
                     using (OleDbDataReader dtr = cmd.ExecuteReader())
                     {
                         while (dtr.Read())
                         {
-                            Time time = new Time();
+                            var time = new Time();
 
                             time.LogId = int.Parse(dtr["log_id"].ToString());
                             time.NamaLog = dtr["log"].ToString();
+                            time.Tanggal = DateTime.Parse(dtr["tanggal"].ToString());
                             time.Jam = int.Parse(dtr["jam"].ToString());
                             time.Menit = int.Parse(dtr["menit"].ToString());
                             time.Detik = int.Parse(dtr["detik"].ToString());
@@ -95,7 +99,7 @@ namespace TimerApp.Model.Repository
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.Print("ReadAll error: {0}", ex.Message);
+                System.Diagnostics.Debug.Print("ReadByDate error: {0}", ex.Message);
             }
 
             return list;

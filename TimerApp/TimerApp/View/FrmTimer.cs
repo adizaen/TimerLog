@@ -28,7 +28,7 @@ namespace TimerApp
             controller = new TimeController();
             ViewAwal();
             InisialisasiDataGridView();
-            TampilkanDataGridView();
+            TampilkanDataGridView(DateTime.Today);
         }
 
         private void InisialisasiDataGridView()
@@ -36,20 +36,24 @@ namespace TimerApp
             dgv.Columns.Add("no", "No.");
             dgv.Columns.Add("id", "ID");
             dgv.Columns.Add("nama", "Log");
+            dgv.Columns.Add("tgl", "Tanggal");
             dgv.Columns.Add("waktu", "Time");
 
             dgv.Columns[0].Width = 40;
             dgv.Columns[1].Width = 50;
             dgv.Columns[2].Width = 100;
-            dgv.Columns[3].Width = 110;
+            dgv.Columns[3].Width = 100;
+            dgv.Columns[4].Width = 110;
 
             dgv.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgv.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgv.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dgv.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgv.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             dgv.Columns[1].Visible = false;
+            dgv.Columns[3].Visible = false;
             dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 9.75F);
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv.AllowUserToAddRows = false;
@@ -123,10 +127,10 @@ namespace TimerApp
             return count;
         }
 
-        private void TampilkanDataGridView()
+        private void TampilkanDataGridView(DateTime dateTime)
         {
             dgv.Rows.Clear();
-            listOfTime = controller.ReadAll();
+            listOfTime = controller.ReadByDate(dateTime);
 
             if (listOfTime.Count != 0)
             {
@@ -135,11 +139,14 @@ namespace TimerApp
                     var noUrut = CountDataGridView();
                     string waktu = time.Jam.ToString("D2") + ":" + time.Menit.ToString("D2") + ":" + time.Detik.ToString("D2");
 
-                    dgv.Rows.Add(noUrut.ToString(), time.LogId, time.NamaLog, waktu);
+                    dgv.Rows.Add(noUrut.ToString(), time.LogId, time.NamaLog, time.Tanggal, waktu);
                 }
 
                 dgv.CurrentCell = dgv.Rows[CountDataGridView() - 2].Cells[0];
             }
+            else if (dtDate.Value != DateTime.Today)
+                MessageBox.Show("Tidak ada riwayat log!", "Peringatan", MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
         }
 
         private void FrmTimer_Load(object sender, EventArgs e)
@@ -189,13 +196,14 @@ namespace TimerApp
         {
             var time = new Time();
 
-            time.NamaLog = "Log " + (CountDataGridView() + 1).ToString();
+            time.NamaLog = "Log " + CountDataGridView().ToString();
+            time.Tanggal = DateTime.Parse(DateTime.Now.ToLongDateString());
             time.Jam = _jam;
             time.Menit = _menit;
             time.Detik = _detik;
             controller.Create(time);
 
-            TampilkanDataGridView();
+            TampilkanDataGridView(DateTime.Today);
         }
 
         private void btnSet_Click(object sender, EventArgs e)
@@ -214,6 +222,11 @@ namespace TimerApp
                 player.Stop();
                 btnStop.Enabled = false;
             }
+        }
+
+        private void dtDate_ValueChanged(object sender, EventArgs e)
+        {
+            TampilkanDataGridView(dtDate.Value);
         }
 
         private void btnStartAt_Click(object sender, EventArgs e)
@@ -244,7 +257,7 @@ namespace TimerApp
                     
                     var result = controller.Delete(time);
                     if (result > 0)
-                        TampilkanDataGridView();
+                        TampilkanDataGridView(DateTime.Today);
                 }
             }
             else

@@ -23,6 +23,12 @@ namespace TimerApp.Controller
                 return 0;
             }
 
+            if (string.IsNullOrEmpty(time.Tanggal.ToString()))
+            {
+                MessageBox.Show("Nama log harus diisi!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return 0;
+            }
+
             if (string.IsNullOrEmpty(time.Jam.ToString()))
             {
                 MessageBox.Show("Jam harus diisi!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -77,14 +83,14 @@ namespace TimerApp.Controller
             return result;
         }
 
-        public List<Time> ReadAll()
+        public List<Time> ReadByDate(DateTime time)
         {
             List<Time> list = new List<Time>();
 
             using (DbContext context = new DbContext())
             {
                 _repository = new TimeRepository(context);
-                list = _repository.ReadAll();
+                list = _repository.ReadByDate(time);
             }
 
             return list;

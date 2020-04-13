@@ -9,6 +9,7 @@ namespace TimerApp.Model.Entity
     {
         public int LogId { get; set; }
         public string NamaLog { get; set; }
+        public DateTime Tanggal { get; set; }
         public int Jam { get; set; }
         public int Menit { get; set; }
         public int Detik { get; set; }
