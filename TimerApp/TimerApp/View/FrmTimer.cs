@@ -135,6 +135,8 @@ namespace TimerApp
 
                 dgv.Rows.Add(noUrut.ToString(), time.LogId, time.NamaLog, waktu);
             }
+
+            dgv.CurrentCell = dgv.Rows[CountDataGridView() - 2].Cells[0];
         }
 
         private void FrmTimer_Load(object sender, EventArgs e)
@@ -212,7 +214,17 @@ namespace TimerApp
 
         private void btnStartAt_Click(object sender, EventArgs e)
         {
+            var time = new Time();
+            int id = int.Parse(dgv.SelectedCells[1].Value.ToString());
+            time = controller.ReadByID(id);
 
+            _jam = time.Jam;
+            _menit = time.Menit;
+            _detik = time.Detik;
+
+            dtStartAt.Text = _jam.ToString("D2") + ":" + _menit.ToString("D2") + ":" + _detik.ToString("D2");
+            btnSet_Click(this, e);
+            btnStart_Click(this, e);
         }
 
         private void btnDelete_Click(object sender, EventArgs e)

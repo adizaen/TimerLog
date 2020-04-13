@@ -89,5 +89,18 @@ namespace TimerApp.Controller
 
             return list;
         }
+
+        public Time ReadByID(int id)
+        {
+            var time = new Time();
+
+            using (DbContext context = new DbContext())
+            {
+                _repository = new TimeRepository(context);
+                time = _repository.ReadByID(id);
+            }
+
+            return time;
+        }
     }
 }

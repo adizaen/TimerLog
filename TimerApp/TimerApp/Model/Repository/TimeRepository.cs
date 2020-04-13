@@ -100,5 +100,36 @@ namespace TimerApp.Model.Repository
 
             return list;
         }
+
+        public Time ReadByID(int id)
+        {
+            var time = new Time();
+
+            try
+            {
+                string sql = @"select jam, menit, detik from tb_time where log_id = @log_id";
+
+                using (OleDbCommand cmd = new OleDbCommand(sql, _conn))
+                {
+                    cmd.Parameters.AddWithValue("@log_id", id);
+
+                    using (OleDbDataReader dtr = cmd.ExecuteReader())
+                    {
+                        while (dtr.Read())
+                        {
+                            time.Jam = int.Parse(dtr["jam"].ToString());
+                            time.Menit = int.Parse(dtr["menit"].ToString());
+                            time.Detik = int.Parse(dtr["detik"].ToString());
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Print("ReadByID error: {0}", ex.Message);
+            }
+
+            return time;
+        }
     }
 }
