@@ -26,9 +26,8 @@ namespace TimerApp
         {
             InitializeComponent();
             controller = new TimeController();
-            ViewAwal();
             InisialisasiDataGridView();
-            TampilkanDataGridView(DateTime.Today);
+            ViewAwal();
         }
 
         private void InisialisasiDataGridView()
@@ -70,8 +69,9 @@ namespace TimerApp
             _detik = 0;
             lblTimer.Text = "00:00:00";
             SetTimer(_jam, _menit, _detik);
+            dtDate.Value = DateTime.Today;
+            TampilkanDataGridView(dtDate.Value);
             this.Text = "Stopwatch";
-            btnStop.Enabled = false;
         }
 
         // Fungsi untuk set waktu pada label timer
@@ -107,14 +107,13 @@ namespace TimerApp
                 var menit = int.Parse(dtAlert.Value.Minute.ToString());
                 var detik = int.Parse(dtAlert.Value.Second.ToString());
 
-                if (_jam == jam && _menit == menit && _detik == detik)
+                if (_jam == jam && _menit == menit && _detik == detik - 1)
                 {
                     player = new SoundPlayer();
 
                     string location = Directory.GetCurrentDirectory() + "\\Media\\Music.wav";
                     player.SoundLocation = location;
                     player.PlayLooping();
-                    btnStop.Enabled = true;
                 }
             }
         }
@@ -130,6 +129,7 @@ namespace TimerApp
         private void TampilkanDataGridView(DateTime dateTime)
         {
             dgv.Rows.Clear();
+
             listOfTime = controller.ReadByDate(dateTime);
 
             if (listOfTime.Count != 0)
@@ -144,9 +144,15 @@ namespace TimerApp
 
                 dgv.CurrentCell = dgv.Rows[CountDataGridView() - 2].Cells[0];
             }
-            else if (dtDate.Value != DateTime.Today)
+            else if (dtDate.Value < DateTime.Today)
                 MessageBox.Show("Tidak ada riwayat log!", "Peringatan", MessageBoxButtons.OK,
                     MessageBoxIcon.Exclamation);
+            else if (dtDate.Value > DateTime.Today)
+            {
+                string message = "Maaf, belum ada riwayat log! " + "\n" + "Hari ini tanggal " + DateTime.Today.ToLongDateString();
+                MessageBox.Show(message, "Peringatan", MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
+            }
         }
 
         private void FrmTimer_Load(object sender, EventArgs e)
@@ -218,14 +224,16 @@ namespace TimerApp
         private void btnStop_Click(object sender, EventArgs e)
         {
             if (this.player.IsLoadCompleted)
-            {
                 player.Stop();
-                btnStop.Enabled = false;
-            }
         }
 
         private void dtDate_ValueChanged(object sender, EventArgs e)
         {
+            if (dtDate.Value != DateTime.Today)
+                btnLog.Enabled = false;
+            else
+                btnLog.Enabled = true;
+
             TampilkanDataGridView(dtDate.Value);
         }
 
