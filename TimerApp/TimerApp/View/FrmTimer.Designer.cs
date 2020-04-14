@@ -48,7 +48,6 @@
             this.btnPause = new System.Windows.Forms.Button();
             this.btnLog = new System.Windows.Forms.Button();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnSwitch = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.lblTimer = new System.Windows.Forms.Label();
@@ -59,6 +58,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.dtDate = new System.Windows.Forms.DateTimePicker();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnSwitch = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -341,21 +341,6 @@
             this.tableLayoutPanel6.Size = new System.Drawing.Size(508, 236);
             this.tableLayoutPanel6.TabIndex = 1;
             // 
-            // btnSwitch
-            // 
-            this.btnSwitch.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSwitch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSwitch.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSwitch.Image = global::TimerApp.Properties.Resources.swap;
-            this.btnSwitch.Location = new System.Drawing.Point(3, 3);
-            this.btnSwitch.Name = "btnSwitch";
-            this.btnSwitch.Size = new System.Drawing.Size(502, 41);
-            this.btnSwitch.TabIndex = 1;
-            this.btnSwitch.Text = " Switch Countdown";
-            this.btnSwitch.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSwitch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSwitch.UseVisualStyleBackColor = true;
-            // 
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -463,6 +448,22 @@
             this.dtDate.TabIndex = 1;
             this.dtDate.Value = new System.DateTime(2020, 4, 13, 0, 0, 0, 0);
             this.dtDate.ValueChanged += new System.EventHandler(this.dtDate_ValueChanged);
+            // 
+            // btnSwitch
+            // 
+            this.btnSwitch.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSwitch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnSwitch.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSwitch.Image = global::TimerApp.Properties.Resources.swap;
+            this.btnSwitch.Location = new System.Drawing.Point(3, 3);
+            this.btnSwitch.Name = "btnSwitch";
+            this.btnSwitch.Size = new System.Drawing.Size(502, 41);
+            this.btnSwitch.TabIndex = 1;
+            this.btnSwitch.Text = " Switch Countdown";
+            this.btnSwitch.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSwitch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSwitch.UseVisualStyleBackColor = true;
+            this.btnSwitch.Click += new System.EventHandler(this.btnSwitch_Click);
             // 
             // FrmTimer
             // 

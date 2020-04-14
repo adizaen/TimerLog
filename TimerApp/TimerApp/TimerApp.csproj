@@ -66,6 +66,12 @@
     <Compile Include="Model\Context\DbContext.cs" />
     <Compile Include="Model\Entity\Time.cs" />
     <Compile Include="Model\Repository\TimeRepository.cs" />
+    <Compile Include="View\FrmCountdown.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FrmCountdown.Designer.cs">
+      <DependentUpon>FrmCountdown.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\FrmTimer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,6 +90,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="View\FrmCountdown.resx">
+      <DependentUpon>FrmCountdown.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\FrmTimer.resx">
       <DependentUpon>FrmTimer.cs</DependentUpon>
     </EmbeddedResource>

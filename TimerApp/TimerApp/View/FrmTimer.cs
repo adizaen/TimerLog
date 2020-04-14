@@ -10,6 +10,7 @@ using System.Media;
 using System.Windows.Forms;
 using TimerApp.Model.Entity;
 using TimerApp.Controller;
+using TimerApp.View;
 
 namespace TimerApp
 {
@@ -67,10 +68,15 @@ namespace TimerApp
             _jam = 0;
             _menit = 0;
             _detik = 0;
-            lblTimer.Text = "00:00:00";
             SetTimer(_jam, _menit, _detik);
+
             dtDate.Value = DateTime.Today;
+            dtStartAt.Text = "00:00:00";
+            dtAlert.Text = "00:00:00";
+            cbAlert.Checked = false;
+
             TampilkanDataGridView(dtDate.Value);
+            btnStart.Text = "Start";
             this.Text = "Stopwatch";
         }
 
@@ -97,6 +103,12 @@ namespace TimerApp
                     _menit = 0;
                     _jam += 1;
                 }
+                if (_jam == 24 && _menit == 0 & _detik == 0)
+                {
+                    _jam = 0;
+                    _menit = 0;
+                    _detik = 0;
+                }
 
                 SetTimer(_jam, _menit, _detik);
             }));
@@ -107,7 +119,7 @@ namespace TimerApp
                 var menit = int.Parse(dtAlert.Value.Minute.ToString());
                 var detik = int.Parse(dtAlert.Value.Second.ToString());
 
-                if (_jam == jam && _menit == menit && _detik == detik - 1)
+                if (_jam == jam && _menit == menit && _detik == detik)
                 {
                     player = new SoundPlayer();
 
@@ -145,8 +157,10 @@ namespace TimerApp
                 dgv.CurrentCell = dgv.Rows[CountDataGridView() - 2].Cells[0];
             }
             else if (dtDate.Value < DateTime.Today)
+            {
                 MessageBox.Show("Tidak ada riwayat log!", "Peringatan", MessageBoxButtons.OK,
                     MessageBoxIcon.Exclamation);
+            }
             else if (dtDate.Value > DateTime.Today)
             {
                 string message = "Maaf, belum ada riwayat log! " + "\n" + "Hari ini tanggal " + DateTime.Today.ToLongDateString();
@@ -178,23 +192,27 @@ namespace TimerApp
         {
             _timer.Stop();
             Application.DoEvents();
+            Application.Exit();
         }
 
         private void btnStart_Click(object sender, EventArgs e)
         {
             _timer.Start();
             this.Text = "Stopwatch - Running";
+            btnStart.Text = "Start";
         }
 
         private void btnPause_Click(object sender, EventArgs e)
         {
             _timer.Stop();
             this.Text = "Stopwatch - Paused";
+
+            btnStart.Text = "Resume";
         }
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            btnPause_Click(this, e);
+            _timer.Stop();
             ViewAwal();
         }
 
@@ -235,6 +253,13 @@ namespace TimerApp
                 btnLog.Enabled = true;
 
             TampilkanDataGridView(dtDate.Value);
+        }
+
+        private void btnSwitch_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            FrmCountdown fCount = new FrmCountdown();
+            fCount.Show();
         }
 
         private void btnStartAt_Click(object sender, EventArgs e)
