@@ -5,8 +5,6 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.IO;
-using System.Media;
 using System.Windows.Forms;
 using TimerApp.Model.Entity;
 using TimerApp.Controller;
@@ -21,7 +19,7 @@ namespace TimerApp
 
         private List<Time> listOfTime = new List<Time>();
         private TimeController controller;
-        private SoundPlayer player;
+        private Alert alert;
 
         public FrmTimer()
         {
@@ -121,11 +119,8 @@ namespace TimerApp
 
                 if (_jam == jam && _menit == menit && _detik == detik)
                 {
-                    player = new SoundPlayer();
-
-                    string location = Directory.GetCurrentDirectory() + "\\Media\\Music.wav";
-                    player.SoundLocation = location;
-                    player.PlayLooping();
+                    alert = new Alert();
+                    alert.AlertSound(jam, menit, detik, _jam, _menit, _detik);   
                 }
             }
         }
@@ -241,8 +236,8 @@ namespace TimerApp
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            if (this.player.IsLoadCompleted)
-                player.Stop();
+            alert = new Alert();
+            alert.StopSound();
         }
 
         private void dtDate_ValueChanged(object sender, EventArgs e)
