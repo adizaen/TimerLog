@@ -28,12 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCountdown));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnSwitch = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblTimer = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.btnStart = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
@@ -44,6 +45,7 @@
             this.btnStopAlert = new System.Windows.Forms.Button();
             this.dtStartAt = new System.Windows.Forms.DateTimePicker();
             this.dtAlert = new System.Windows.Forms.DateTimePicker();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -65,9 +67,9 @@
             this.tableLayoutPanel1.RowCount = 5;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 58F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 1F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(801, 393);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
@@ -101,7 +103,7 @@
             // 
             this.tableLayoutPanel2.ColumnCount = 1;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.lblTimer, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -110,17 +112,17 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(793, 219);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
-            // label1
+            // lblTimer
             // 
-            this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 130F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(787, 219);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "00:00:00";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblTimer.AutoSize = true;
+            this.lblTimer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 130F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTimer.Location = new System.Drawing.Point(3, 0);
+            this.lblTimer.Name = "lblTimer";
+            this.lblTimer.Size = new System.Drawing.Size(787, 219);
+            this.lblTimer.TabIndex = 0;
+            this.lblTimer.Text = "00:00:00";
+            this.lblTimer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel3
             // 
@@ -134,7 +136,7 @@
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(795, 56);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(795, 64);
             this.tableLayoutPanel3.TabIndex = 2;
             // 
             // btnStart
@@ -146,10 +148,11 @@
             this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStart.Location = new System.Drawing.Point(3, 3);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(391, 50);
+            this.btnStart.Size = new System.Drawing.Size(391, 58);
             this.btnStart.TabIndex = 0;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = false;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // btnStop
             // 
@@ -160,10 +163,11 @@
             this.btnStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStop.Location = new System.Drawing.Point(400, 3);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(392, 50);
+            this.btnStop.Size = new System.Drawing.Size(392, 58);
             this.btnStop.TabIndex = 1;
             this.btnStop.Text = "Stop";
             this.btnStop.UseVisualStyleBackColor = false;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
             // tableLayoutPanel4
             // 
@@ -182,11 +186,11 @@
             this.tableLayoutPanel4.Controls.Add(this.dtStartAt, 1, 0);
             this.tableLayoutPanel4.Controls.Add(this.dtAlert, 5, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 358);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 350);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(795, 32);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(795, 40);
             this.tableLayoutPanel4.TabIndex = 3;
             // 
             // label2
@@ -195,7 +199,7 @@
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label2.Location = new System.Drawing.Point(3, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(62, 32);
+            this.label2.Size = new System.Drawing.Size(62, 40);
             this.label2.TabIndex = 0;
             this.label2.Text = "Start at :";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -206,7 +210,7 @@
             this.cbAlert.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbAlert.Location = new System.Drawing.Point(455, 3);
             this.cbAlert.Name = "cbAlert";
-            this.cbAlert.Size = new System.Drawing.Size(80, 26);
+            this.cbAlert.Size = new System.Drawing.Size(80, 34);
             this.cbAlert.TabIndex = 1;
             this.cbAlert.Text = "Alert at :";
             this.cbAlert.UseVisualStyleBackColor = true;
@@ -217,10 +221,11 @@
             this.btnSet.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnSet.Location = new System.Drawing.Point(199, 3);
             this.btnSet.Name = "btnSet";
-            this.btnSet.Size = new System.Drawing.Size(122, 26);
+            this.btnSet.Size = new System.Drawing.Size(122, 34);
             this.btnSet.TabIndex = 2;
             this.btnSet.Text = "Set";
             this.btnSet.UseVisualStyleBackColor = true;
+            this.btnSet.Click += new System.EventHandler(this.btnSet_Click);
             // 
             // btnStopAlert
             // 
@@ -228,32 +233,33 @@
             this.btnStopAlert.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnStopAlert.Location = new System.Drawing.Point(669, 3);
             this.btnStopAlert.Name = "btnStopAlert";
-            this.btnStopAlert.Size = new System.Drawing.Size(123, 26);
+            this.btnStopAlert.Size = new System.Drawing.Size(123, 34);
             this.btnStopAlert.TabIndex = 3;
             this.btnStopAlert.Text = "Stop";
             this.btnStopAlert.UseVisualStyleBackColor = true;
+            this.btnStopAlert.Click += new System.EventHandler(this.btnStopAlert_Click);
             // 
             // dtStartAt
             // 
             this.dtStartAt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dtStartAt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtStartAt.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtStartAt.Format = System.Windows.Forms.DateTimePickerFormat.Time;
             this.dtStartAt.Location = new System.Drawing.Point(71, 3);
             this.dtStartAt.Name = "dtStartAt";
             this.dtStartAt.ShowUpDown = true;
-            this.dtStartAt.Size = new System.Drawing.Size(122, 26);
+            this.dtStartAt.Size = new System.Drawing.Size(122, 35);
             this.dtStartAt.TabIndex = 4;
             this.dtStartAt.Value = new System.DateTime(2020, 4, 14, 0, 0, 0, 0);
             // 
             // dtAlert
             // 
             this.dtAlert.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dtAlert.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtAlert.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtAlert.Format = System.Windows.Forms.DateTimePickerFormat.Time;
             this.dtAlert.Location = new System.Drawing.Point(541, 3);
             this.dtAlert.Name = "dtAlert";
             this.dtAlert.ShowUpDown = true;
-            this.dtAlert.Size = new System.Drawing.Size(122, 26);
+            this.dtAlert.Size = new System.Drawing.Size(122, 35);
             this.dtAlert.TabIndex = 5;
             this.dtAlert.Value = new System.DateTime(2020, 4, 14, 0, 0, 0, 0);
             // 
@@ -265,12 +271,14 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "FrmCountdown";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Countdown";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmCountdown_FormClosing);
+            this.Load += new System.EventHandler(this.FrmCountdown_Load);
+            this.Shown += new System.EventHandler(this.FrmCountdown_Shown);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -288,7 +296,7 @@
         private System.Windows.Forms.Button btnSwitch;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblTimer;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnStop;
@@ -299,5 +307,6 @@
         private System.Windows.Forms.Button btnStopAlert;
         private System.Windows.Forms.DateTimePicker dtStartAt;
         private System.Windows.Forms.DateTimePicker dtAlert;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

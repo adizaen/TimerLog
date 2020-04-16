@@ -158,9 +158,14 @@ namespace TimerApp
             }
             else if (dtDate.Value > DateTime.Today)
             {
-                string message = "Maaf, belum ada riwayat log! " + "\n" + "Hari ini tanggal " + DateTime.Today.ToLongDateString();
-                MessageBox.Show(message, "Peringatan", MessageBoxButtons.OK,
-                    MessageBoxIcon.Exclamation);
+                string message = "Maaf, belum ada riwayat log! Hari ini tanggal " + DateTime.Today.ToLongDateString() + 
+                    "\n" + "Kembali ke tanggal hari ini?";
+                if (MessageBox.Show(message, "Peringatan", MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Exclamation) == DialogResult.Yes)
+                {
+                    dtDate.Value = DateTime.Today;
+                }
+                
             }
         }
 
@@ -181,6 +186,11 @@ namespace TimerApp
             _timer = new System.Timers.Timer();
             _timer.Interval = 1000;
             _timer.Elapsed += OnTimeEvent;
+        }
+
+        private void FrmTimer_Shown(object sender, EventArgs e)
+        {
+            lblTimer.Focus();
         }
 
         private void FrmTimer_FormClosing(object sender, FormClosingEventArgs e)
@@ -260,16 +270,25 @@ namespace TimerApp
         private void btnStartAt_Click(object sender, EventArgs e)
         {
             var time = new Time();
-            int id = int.Parse(dgv.SelectedCells[1].Value.ToString());
-            time = controller.ReadByID(id);
+           
+            if (dgv.SelectedRows.Count > 0)
+            {
+                int id = int.Parse(dgv.SelectedCells[1].Value.ToString());
+                time = controller.ReadByID(id);
 
-            _jam = time.Jam;
-            _menit = time.Menit;
-            _detik = time.Detik;
+                _jam = time.Jam;
+                _menit = time.Menit;
+                _detik = time.Detik;
 
-            dtStartAt.Text = _jam.ToString("D2") + ":" + _menit.ToString("D2") + ":" + _detik.ToString("D2");
-            btnSet_Click(this, e);
-            btnStart_Click(this, e);
+                dtStartAt.Text = _jam.ToString("D2") + ":" + _menit.ToString("D2") + ":" + _detik.ToString("D2");
+                btnSet_Click(this, e);
+                btnStart_Click(this, e);
+            }
+            else
+            {
+                MessageBox.Show("Data log belum dipilih!", "Peringatan",
+                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
