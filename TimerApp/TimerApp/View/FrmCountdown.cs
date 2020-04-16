@@ -163,7 +163,10 @@ namespace TimerApp.View
             lblTimer.Text = sisa.ToString();
 
             if (sisa.TotalSeconds <= 0)
+            {
+                timer1.Stop();
                 ViewAwal();
+            }
         }
 
         private void btnStopAlert_Click(object sender, EventArgs e)
