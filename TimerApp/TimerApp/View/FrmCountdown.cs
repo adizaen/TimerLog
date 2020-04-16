@@ -27,6 +27,10 @@ namespace TimerApp.View
 
         private void ViewAwal()
         {
+            _jam = 0;
+            _menit = 0;
+            _detik = 0;
+            SetTimer(_jam, _menit, _detik);
 
             dtStartAt.Text = "00:00:00";
             dtAlert.Text = "00:00:00";
@@ -89,9 +93,18 @@ namespace TimerApp.View
             this.Hide();
         }
 
+        private void btnSet_Click(object sender, EventArgs e)
+        {
+            _jam = int.Parse(dtStartAt.Value.Hour.ToString());
+            _menit = int.Parse(dtStartAt.Value.Minute.ToString());
+            _detik = int.Parse(dtStartAt.Value.Second.ToString());
+
+            SetTimer(_jam, _menit, _detik);
+        }
+
         private void btnStart_Click(object sender, EventArgs e)
         {
-            if (_jam != 0 && _menit != 0 && _detik != 0)
+            if (lblTimer.Text != "00:00:00")
             {
                 timer1.Enabled = true;
                 timer1.Start();
@@ -110,21 +123,39 @@ namespace TimerApp.View
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            timer1.Enabled = false;
-            timer1.Stop();
-            keterangan += 1;
-            TextTombol(3);
-            TextTombol(4);
-            this.Text = "Countdown - Stopped";
+            if (lblTimer.Text != "00:00:00")
+            {
+                timer1.Enabled = false;
+                timer1.Stop();
+                keterangan += 1;
+                TextTombol(3);
+                TextTombol(4);
+                this.Text = "Countdown - Stopped";
 
-            if (keterangan == 2)
-                ViewAwal();
+                if (keterangan == 2)
+                    ViewAwal();
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             TimeSpan sisa = _stopTime.Subtract(DateTime.Now);
-            sisa = new TimeSpan(sisa.Hours, sisa.Minutes, sisa.Seconds);
+
+            var jam = int.Parse(dtAlert.Value.Hour.ToString());
+            var menit = int.Parse(dtAlert.Value.Minute.ToString());
+            var detik = int.Parse(dtAlert.Value.Second.ToString());
+
+            var _jam = sisa.Hours;
+            var _menit = sisa.Minutes;
+            var _detik = sisa.Seconds;
+
+            sisa = new TimeSpan(_jam, _menit, _detik);
+
+            if (cbAlert.Checked == true && _jam == jam && _menit == menit && _detik == detik)
+            {
+                alert = new Alert();
+                alert.AlertSound(jam, menit, detik, _jam, _menit, _detik);
+            }
 
             if (sisa.TotalSeconds < 0)
                 sisa = TimeSpan.Zero;
@@ -132,16 +163,7 @@ namespace TimerApp.View
             lblTimer.Text = sisa.ToString();
 
             if (sisa.TotalSeconds <= 0)
-                btnStop_Click(this, e);
-        }
-
-        private void btnSet_Click(object sender, EventArgs e)
-        {
-            _jam = int.Parse(dtStartAt.Value.Hour.ToString());
-            _menit = int.Parse(dtStartAt.Value.Minute.ToString());
-            _detik = int.Parse(dtStartAt.Value.Second.ToString());
-
-            SetTimer(_jam, _menit, _detik);
+                ViewAwal();
         }
 
         private void btnStopAlert_Click(object sender, EventArgs e)
