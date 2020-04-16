@@ -46,6 +46,7 @@
             this.dtStartAt = new System.Windows.Forms.DateTimePicker();
             this.dtAlert = new System.Windows.Forms.DateTimePicker();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -263,6 +264,11 @@
             this.dtAlert.TabIndex = 5;
             this.dtAlert.Value = new System.DateTime(2020, 4, 14, 0, 0, 0, 0);
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // FrmCountdown
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -308,5 +314,6 @@
         private System.Windows.Forms.DateTimePicker dtStartAt;
         private System.Windows.Forms.DateTimePicker dtAlert;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Timer timer1;
     }
 }

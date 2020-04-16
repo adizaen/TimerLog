@@ -14,8 +14,9 @@ namespace TimerApp.View
 {
     public partial class FrmCountdown : Form
     {
-        private System.Timers.Timer _timer;
+        private DateTime _stopTime = new DateTime();
         private int _jam, _menit, _detik, keterangan;
+
         private Alert alert;
 
         public FrmCountdown()
@@ -26,10 +27,6 @@ namespace TimerApp.View
 
         private void ViewAwal()
         {
-            _jam = 0;
-            _menit = 0;
-            _detik = 0;
-            SetTimer(_jam, _menit, _detik);
 
             dtStartAt.Text = "00:00:00";
             dtAlert.Text = "00:00:00";
@@ -64,52 +61,6 @@ namespace TimerApp.View
                     Menit.ToString().PadLeft(2, '0'), Detik.ToString().PadLeft(2, '0'));
         }
 
-        private void OnTimeEvent(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            var jam = int.Parse(dtAlert.Value.Hour.ToString());
-            var menit = int.Parse(dtAlert.Value.Minute.ToString());
-            var detik = int.Parse(dtAlert.Value.Second.ToString());
-
-            Invoke(new Action(() =>
-            {
-                if (_detik == 0)
-                {
-                    _detik = 60;
-                    if (_menit != 0)
-                        _menit -= 1;
-                }
-
-                if (_menit != 0 && _jam != 0)
-                {
-                    if (_menit == 0)
-                    {
-                        _menit = 59;
-                        if (_jam != 0)
-                            _jam -= 1;
-                    }
-                }
-
-                _detik -= 1;
-
-                if (_jam == 0 && _menit == 0 & _detik == 0)
-                {
-                    alert = new Alert();
-                    alert.AlertSound(jam, menit, detik, _jam, _menit, _detik);
-
-                    _timer.Stop();
-                    ViewAwal();
-                }
-
-                SetTimer(_jam, _menit, _detik);
-            }));
-
-            if (cbAlert.Checked == true && _jam == jam && _menit == menit && _detik == detik)
-            {
-                alert = new Alert();
-                alert.AlertSound(jam, menit, detik, _jam, _menit, _detik);
-            }
-        }
-
         private void FrmCountdown_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
@@ -124,10 +75,6 @@ namespace TimerApp.View
             toolTip1.SetToolTip(this.btnStop, "Stop timer");
             toolTip1.SetToolTip(this.btnSet, "Custom start timer");
             toolTip1.SetToolTip(this.btnStop, "Stop alarm sound");
-
-            _timer = new System.Timers.Timer();
-            _timer.Interval = 1000;
-            _timer.Elapsed += OnTimeEvent;
         }
 
         private void FrmCountdown_Shown(object sender, EventArgs e)
@@ -144,14 +91,17 @@ namespace TimerApp.View
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            if (_jam != 0 || _menit != 0 || _detik != 0)
+            if (_jam != 0 && _menit != 0 && _detik != 0)
             {
-                _timer.Start();
-                this.Text = "Countdown - Running";
+                timer1.Enabled = true;
+                timer1.Start();
+                TimeSpan durasi = TimeSpan.Parse(lblTimer.Text);
+                _stopTime = DateTime.Now.Add(durasi);
 
-                TextTombol(1); // Start
-                TextTombol(2); // Stop
                 keterangan = 0;
+                TextTombol(1);
+                TextTombol(2);
+                this.Text = "Countdown - Running";
             }
             else
                 MessageBox.Show("Set timer terlebih dahulu!", "Peringatan",
@@ -160,18 +110,29 @@ namespace TimerApp.View
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            if (_jam != 0 || _menit != 0 || _detik != 0)
-            {
-                _timer.Stop();
-                this.Text = "Countdown - Stopped";
+            timer1.Enabled = false;
+            timer1.Stop();
+            keterangan += 1;
+            TextTombol(3);
+            TextTombol(4);
+            this.Text = "Countdown - Stopped";
 
-                TextTombol(3); // Resume
-                TextTombol(4); // Reset
-                keterangan += 1;
+            if (keterangan == 2)
+                ViewAwal();
+        }
 
-                if (keterangan == 2)
-                    ViewAwal();
-            }
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            TimeSpan sisa = _stopTime.Subtract(DateTime.Now);
+            sisa = new TimeSpan(sisa.Hours, sisa.Minutes, sisa.Seconds);
+
+            if (sisa.TotalSeconds < 0)
+                sisa = TimeSpan.Zero;
+
+            lblTimer.Text = sisa.ToString();
+
+            if (sisa.TotalSeconds <= 0)
+                btnStop_Click(this, e);
         }
 
         private void btnSet_Click(object sender, EventArgs e)
