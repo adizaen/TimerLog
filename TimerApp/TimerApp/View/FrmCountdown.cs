@@ -153,6 +153,8 @@ namespace TimerApp.View
             _menit = sisa.Minutes;
             _detik = sisa.Seconds;
 
+            SetTimer(_jam, _menit, _detik);
+
             if (cbAlert.Checked == true && _jam == jam && _menit == menit && _detik == detik)
             {
                 alert = new Alert();
@@ -165,9 +167,7 @@ namespace TimerApp.View
                 timer1.Enabled = false;
                 timer1.Stop();
                 ViewAwal();
-            }
-
-            lblTimer.Text = sisa.ToString();
+            }         
         }
 
         private void btnStopAlert_Click(object sender, EventArgs e)
