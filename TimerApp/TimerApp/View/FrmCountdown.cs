@@ -6,16 +6,14 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using TimerApp.Model.Entity;
 using TimerApp.Controller;
-using TimerApp.View;
 
 namespace TimerApp.View
 {
     public partial class FrmCountdown : Form
     {
         private DateTime _stopTime = new DateTime();
-        private int _jam, _menit, _detik, keterangan;
+        private int _jam, _menit, _detik, jam, menit, detik, keterangan;
 
         private Alert alert;
 
@@ -121,6 +119,16 @@ namespace TimerApp.View
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
+        private void dtAlert_ValueChanged(object sender, EventArgs e)
+        {
+            if (cbAlert.Checked == true)
+            {
+                jam = int.Parse(dtAlert.Value.Hour.ToString());
+                menit = int.Parse(dtAlert.Value.Minute.ToString());
+                detik = int.Parse(dtAlert.Value.Second.ToString());
+            }
+        }
+
         private void btnStop_Click(object sender, EventArgs e)
         {
             if (lblTimer.Text != "00:00:00")
@@ -141,15 +149,9 @@ namespace TimerApp.View
         {
             TimeSpan sisa = _stopTime.Subtract(DateTime.Now);
 
-            var jam = int.Parse(dtAlert.Value.Hour.ToString());
-            var menit = int.Parse(dtAlert.Value.Minute.ToString());
-            var detik = int.Parse(dtAlert.Value.Second.ToString());
-
-            var _jam = sisa.Hours;
-            var _menit = sisa.Minutes;
-            var _detik = sisa.Seconds;
-
-            sisa = new TimeSpan(_jam, _menit, _detik);
+            _jam = sisa.Hours;
+            _menit = sisa.Minutes;
+            _detik = sisa.Seconds;
 
             if (cbAlert.Checked == true && _jam == jam && _menit == menit && _detik == detik)
             {
@@ -157,16 +159,15 @@ namespace TimerApp.View
                 alert.AlertSound(jam, menit, detik, _jam, _menit, _detik);
             }
 
-            if (sisa.TotalSeconds < 0)
-                sisa = TimeSpan.Zero;
-
-            lblTimer.Text = sisa.ToString();
-
             if (sisa.TotalSeconds <= 0)
             {
+                sisa = TimeSpan.Zero;
+                timer1.Enabled = false;
                 timer1.Stop();
                 ViewAwal();
             }
+
+            lblTimer.Text = sisa.ToString();
         }
 
         private void btnStopAlert_Click(object sender, EventArgs e)

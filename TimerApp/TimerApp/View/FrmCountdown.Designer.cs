@@ -263,6 +263,7 @@
             this.dtAlert.Size = new System.Drawing.Size(122, 35);
             this.dtAlert.TabIndex = 5;
             this.dtAlert.Value = new System.DateTime(2020, 4, 14, 0, 0, 0, 0);
+            this.dtAlert.ValueChanged += new System.EventHandler(this.dtAlert_ValueChanged);
             // 
             // timer1
             // 
