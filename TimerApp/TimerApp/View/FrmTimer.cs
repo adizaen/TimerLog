@@ -15,7 +15,7 @@ namespace TimerApp
     public partial class FrmTimer : Form
     {
         private System.Timers.Timer _timer;
-        private int _jam, _menit, _detik;
+        private int _jam, _menit, _detik, jumlahLog;
 
         private List<Time> listOfTime = new List<Time>();
         private TimeController controller;
@@ -27,6 +27,7 @@ namespace TimerApp
             controller = new TimeController();
             InisialisasiDataGridView();
             ViewAwal();
+            jumlahLog = 0;
         }
 
         private void InisialisasiDataGridView()
@@ -223,9 +224,12 @@ namespace TimerApp
 
         private void btnLog_Click(object sender, EventArgs e)
         {
+            jumlahLog += 1;
+
+            var namaLog = "Log " + jumlahLog.ToString();
             var time = new Time();
 
-            time.NamaLog = "Log " + CountDataGridView().ToString();
+            time.NamaLog = namaLog;
             time.Tanggal = DateTime.Parse(DateTime.Now.ToLongDateString());
             time.Jam = _jam;
             time.Menit = _menit;
