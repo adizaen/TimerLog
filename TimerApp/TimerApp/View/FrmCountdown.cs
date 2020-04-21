@@ -47,13 +47,13 @@ namespace TimerApp.View
         private void TextTombol(int number)
         {
             if (number == 1)
-                btnStart.Text = "Start";
+                btnStart.Text = "  Start";
             else if (number == 2)
-                btnStop.Text = "Stop";
+                btnStop.Text = "  Stop";
             else if (number == 3)
-                btnStart.Text = "Resume";
+                btnStart.Text = "  Resume";
             else
-                btnStop.Text = "Reset";
+                btnStop.Text = "  Reset";
         }
 
         // Fungsi untuk set waktu pada label timer

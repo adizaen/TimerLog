@@ -117,6 +117,19 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="iconfinder_hourglass_1055043.ico" />
+    <None Include="Resources\iconfinder_Play01_928430.png" />
+    <None Include="Resources\iconfinder_media-stop_216325 %281%29.png" />
+    <None Include="Resources\iconfinder_media-stop_216325.png" />
+    <None Include="Resources\iconfinder_icons_add_1564491.png" />
+    <None Include="Resources\output-onlinepngtools %281%29.png" />
+    <None Include="Resources\output-onlinepngtools.png" />
+    <None Include="Resources\kindpng1_791529.png" />
+    <None Include="Resources\kindpng_791529.png" />
+    <None Include="Resources\iconfinder_update_678134.png" />
+    <None Include="Resources\iconfinder_UI_Basic_outline-82_4733300.png" />
+    <None Include="Resources\iconfinder_pause-circle_2561308.png" />
+    <None Include="Resources\iconfinder_Play_984752 %281%29.png" />
+    <None Include="Resources\iconfinder_Play_984752.png" />
     <None Include="Properties\iconfinder_settings_3855598.png" />
     <None Include="Properties\swap.png" />
     <None Include="Properties\global-settings.png" />

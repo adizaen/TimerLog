@@ -42,7 +42,7 @@ namespace TimerApp
             dgv.Columns[1].Width = 50;
             dgv.Columns[2].Width = 100;
             dgv.Columns[3].Width = 100;
-            dgv.Columns[4].Width = 110;
+            dgv.Columns[4].Width = 130;
 
             dgv.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgv.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -53,7 +53,8 @@ namespace TimerApp
 
             dgv.Columns[1].Visible = false;
             dgv.Columns[3].Visible = false;
-            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 9.75F);
+            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 12, FontStyle.Bold);
+            dgv.RowsDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 10);
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv.AllowUserToAddRows = false;
             dgv.MultiSelect = false;
@@ -134,6 +135,16 @@ namespace TimerApp
             return count;
         }
 
+        private bool CekAngka(int value)
+        {
+            bool isOdd = true;
+
+            if (value % 2 == 0)
+                isOdd = false;
+
+            return isOdd;
+        }
+
         private void TampilkanDataGridView(DateTime dateTime)
         {
             dgv.Rows.Clear();
@@ -142,15 +153,23 @@ namespace TimerApp
 
             if (listOfTime.Count != 0)
             {
+                int jumlahBaris = 0;
+
                 foreach (var time in listOfTime)
                 {
                     var noUrut = CountDataGridView();
                     string waktu = time.Jam.ToString("D2") + ":" + time.Menit.ToString("D2") + ":" + time.Detik.ToString("D2");
 
                     dgv.Rows.Add(noUrut.ToString(), time.LogId, time.NamaLog, time.Tanggal, waktu);
+
+                    if (CekAngka(jumlahBaris))
+                        dgv.Rows[jumlahBaris].DefaultCellStyle.BackColor = Color.LightGray;
+
+                    jumlahBaris += 1;
                 }
 
                 dgv.CurrentCell = dgv.Rows[CountDataGridView() - 2].Cells[0];
+
             }
             else if (dtDate.Value < DateTime.Today)
             {
