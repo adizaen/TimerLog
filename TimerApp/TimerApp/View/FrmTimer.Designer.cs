@@ -43,7 +43,12 @@
             this.btnStop = new System.Windows.Forms.Button();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnStart = new System.Windows.Forms.Button();
+            this.btnReset = new System.Windows.Forms.Button();
+            this.btnPause = new System.Windows.Forms.Button();
+            this.btnLog = new System.Windows.Forms.Button();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnSwitch = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.lblTimer = new System.Windows.Forms.Label();
@@ -54,11 +59,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.dtDate = new System.Windows.Forms.DateTimePicker();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnStart = new System.Windows.Forms.Button();
-            this.btnReset = new System.Windows.Forms.Button();
-            this.btnPause = new System.Windows.Forms.Button();
-            this.btnLog = new System.Windows.Forms.Button();
-            this.btnSwitch = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -270,6 +270,74 @@
             this.tableLayoutPanel5.Size = new System.Drawing.Size(550, 114);
             this.tableLayoutPanel5.TabIndex = 0;
             // 
+            // btnStart
+            // 
+            this.btnStart.BackColor = System.Drawing.Color.LimeGreen;
+            this.btnStart.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnStart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStart.Image = global::TimerApp.Properties.Resources.iconfinder_Play_984752__1_;
+            this.btnStart.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnStart.Location = new System.Drawing.Point(3, 3);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(269, 51);
+            this.btnStart.TabIndex = 0;
+            this.btnStart.Text = "Start";
+            this.btnStart.UseVisualStyleBackColor = false;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // btnReset
+            // 
+            this.btnReset.BackColor = System.Drawing.Color.Firebrick;
+            this.btnReset.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnReset.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReset.Image = global::TimerApp.Properties.Resources.output_onlinepngtools__1_;
+            this.btnReset.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnReset.Location = new System.Drawing.Point(3, 60);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(269, 51);
+            this.btnReset.TabIndex = 1;
+            this.btnReset.Text = "Reset";
+            this.btnReset.UseVisualStyleBackColor = false;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            // 
+            // btnPause
+            // 
+            this.btnPause.BackColor = System.Drawing.Color.Gold;
+            this.btnPause.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnPause.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnPause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPause.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPause.Image = global::TimerApp.Properties.Resources.iconfinder_pause_circle_2561308;
+            this.btnPause.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPause.Location = new System.Drawing.Point(278, 3);
+            this.btnPause.Name = "btnPause";
+            this.btnPause.Size = new System.Drawing.Size(269, 51);
+            this.btnPause.TabIndex = 2;
+            this.btnPause.Text = "Pause";
+            this.btnPause.UseVisualStyleBackColor = false;
+            this.btnPause.Click += new System.EventHandler(this.btnPause_Click);
+            // 
+            // btnLog
+            // 
+            this.btnLog.BackColor = System.Drawing.Color.White;
+            this.btnLog.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnLog.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLog.Image = global::TimerApp.Properties.Resources.iconfinder_icons_add_1564491;
+            this.btnLog.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLog.Location = new System.Drawing.Point(278, 60);
+            this.btnLog.Name = "btnLog";
+            this.btnLog.Size = new System.Drawing.Size(269, 51);
+            this.btnLog.TabIndex = 3;
+            this.btnLog.Text = "Log";
+            this.btnLog.UseVisualStyleBackColor = false;
+            this.btnLog.Click += new System.EventHandler(this.btnLog_Click);
+            // 
             // tableLayoutPanel6
             // 
             this.tableLayoutPanel6.ColumnCount = 1;
@@ -284,6 +352,22 @@
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
             this.tableLayoutPanel6.Size = new System.Drawing.Size(550, 272);
             this.tableLayoutPanel6.TabIndex = 1;
+            // 
+            // btnSwitch
+            // 
+            this.btnSwitch.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSwitch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnSwitch.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSwitch.Image = global::TimerApp.Properties.Resources.swap;
+            this.btnSwitch.Location = new System.Drawing.Point(3, 3);
+            this.btnSwitch.Name = "btnSwitch";
+            this.btnSwitch.Size = new System.Drawing.Size(544, 48);
+            this.btnSwitch.TabIndex = 1;
+            this.btnSwitch.Text = " Switch Countdown";
+            this.btnSwitch.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSwitch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSwitch.UseVisualStyleBackColor = true;
+            this.btnSwitch.Click += new System.EventHandler(this.btnSwitch_Click);
             // 
             // panel1
             // 
@@ -393,90 +477,6 @@
             this.dtDate.TabIndex = 1;
             this.dtDate.Value = new System.DateTime(2020, 4, 13, 0, 0, 0, 0);
             this.dtDate.ValueChanged += new System.EventHandler(this.dtDate_ValueChanged);
-            // 
-            // btnStart
-            // 
-            this.btnStart.BackColor = System.Drawing.Color.LimeGreen;
-            this.btnStart.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnStart.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStart.Image = global::TimerApp.Properties.Resources.iconfinder_Play_984752__1_;
-            this.btnStart.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnStart.Location = new System.Drawing.Point(3, 3);
-            this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(269, 51);
-            this.btnStart.TabIndex = 0;
-            this.btnStart.Text = "Start";
-            this.btnStart.UseVisualStyleBackColor = false;
-            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
-            // 
-            // btnReset
-            // 
-            this.btnReset.BackColor = System.Drawing.Color.Firebrick;
-            this.btnReset.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnReset.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReset.Image = global::TimerApp.Properties.Resources.output_onlinepngtools__1_;
-            this.btnReset.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnReset.Location = new System.Drawing.Point(3, 60);
-            this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(269, 51);
-            this.btnReset.TabIndex = 1;
-            this.btnReset.Text = "Reset";
-            this.btnReset.UseVisualStyleBackColor = false;
-            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
-            // 
-            // btnPause
-            // 
-            this.btnPause.BackColor = System.Drawing.Color.Gold;
-            this.btnPause.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnPause.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnPause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPause.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPause.Image = global::TimerApp.Properties.Resources.iconfinder_pause_circle_2561308;
-            this.btnPause.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPause.Location = new System.Drawing.Point(278, 3);
-            this.btnPause.Name = "btnPause";
-            this.btnPause.Size = new System.Drawing.Size(269, 51);
-            this.btnPause.TabIndex = 2;
-            this.btnPause.Text = "Pause";
-            this.btnPause.UseVisualStyleBackColor = false;
-            this.btnPause.Click += new System.EventHandler(this.btnPause_Click);
-            // 
-            // btnLog
-            // 
-            this.btnLog.BackColor = System.Drawing.Color.White;
-            this.btnLog.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnLog.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLog.Image = global::TimerApp.Properties.Resources.iconfinder_icons_add_1564491;
-            this.btnLog.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLog.Location = new System.Drawing.Point(278, 60);
-            this.btnLog.Name = "btnLog";
-            this.btnLog.Size = new System.Drawing.Size(269, 51);
-            this.btnLog.TabIndex = 3;
-            this.btnLog.Text = "Log";
-            this.btnLog.UseVisualStyleBackColor = false;
-            this.btnLog.Click += new System.EventHandler(this.btnLog_Click);
-            // 
-            // btnSwitch
-            // 
-            this.btnSwitch.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSwitch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSwitch.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSwitch.Image = global::TimerApp.Properties.Resources.swap;
-            this.btnSwitch.Location = new System.Drawing.Point(3, 3);
-            this.btnSwitch.Name = "btnSwitch";
-            this.btnSwitch.Size = new System.Drawing.Size(544, 48);
-            this.btnSwitch.TabIndex = 1;
-            this.btnSwitch.Text = " Switch Countdown";
-            this.btnSwitch.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSwitch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSwitch.UseVisualStyleBackColor = true;
-            this.btnSwitch.Click += new System.EventHandler(this.btnSwitch_Click);
             // 
             // FrmTimer
             // 
