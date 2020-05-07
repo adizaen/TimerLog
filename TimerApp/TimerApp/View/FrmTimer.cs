@@ -42,7 +42,7 @@ namespace TimerApp
             dgv.Columns[1].Width = 50;
             dgv.Columns[2].Width = 100;
             dgv.Columns[3].Width = 100;
-            dgv.Columns[4].Width = 130;
+            dgv.Columns[4].Width = 147;
 
             dgv.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgv.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -53,13 +53,14 @@ namespace TimerApp
 
             dgv.Columns[1].Visible = false;
             dgv.Columns[3].Visible = false;
-            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 12, FontStyle.Bold);
+            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 10, FontStyle.Bold);
             dgv.RowsDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 10);
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv.AllowUserToAddRows = false;
             dgv.MultiSelect = false;
             dgv.RowHeadersVisible = false;
             dgv.ReadOnly = true;
+            dgv.ScrollBars = ScrollBars.Vertical;
         }
 
         // Fungsi untuk menampilkan tampilan default

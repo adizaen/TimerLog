@@ -36,7 +36,6 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
-            this.cbAlert = new System.Windows.Forms.CheckBox();
             this.dtStartAt = new System.Windows.Forms.DateTimePicker();
             this.dtAlert = new System.Windows.Forms.DateTimePicker();
             this.btnSet = new System.Windows.Forms.Button();
@@ -59,6 +58,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.dtDate = new System.Windows.Forms.DateTimePicker();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.cbAlert = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -170,18 +170,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Start at :";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // cbAlert
-            // 
-            this.cbAlert.AutoSize = true;
-            this.cbAlert.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbAlert.Location = new System.Drawing.Point(276, 3);
-            this.cbAlert.Name = "cbAlert";
-            this.cbAlert.Size = new System.Drawing.Size(74, 33);
-            this.cbAlert.TabIndex = 1;
-            this.cbAlert.Text = "Alert at :";
-            this.cbAlert.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.cbAlert.UseVisualStyleBackColor = true;
             // 
             // dtStartAt
             // 
@@ -478,6 +466,18 @@
             this.dtDate.Value = new System.DateTime(2020, 4, 13, 0, 0, 0, 0);
             this.dtDate.ValueChanged += new System.EventHandler(this.dtDate_ValueChanged);
             // 
+            // cbAlert
+            // 
+            this.cbAlert.AutoSize = true;
+            this.cbAlert.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbAlert.Location = new System.Drawing.Point(276, 3);
+            this.cbAlert.Name = "cbAlert";
+            this.cbAlert.Size = new System.Drawing.Size(74, 33);
+            this.cbAlert.TabIndex = 1;
+            this.cbAlert.Text = "Alert at :";
+            this.cbAlert.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.cbAlert.UseVisualStyleBackColor = true;
+            // 
             // FrmTimer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -521,7 +521,6 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox cbAlert;
         private System.Windows.Forms.DateTimePicker dtStartAt;
         private System.Windows.Forms.DateTimePicker dtAlert;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
@@ -544,6 +543,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DateTimePicker dtDate;
+        private System.Windows.Forms.CheckBox cbAlert;
     }
 }
 
